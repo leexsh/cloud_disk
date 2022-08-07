@@ -1,0 +1,285 @@
+service core-api {
+	//用户登录
+	@handler UserLogin
+	post /user/login(LoginRequest) returns (LoginResponse)
+	
+	// 用户详情信息
+	@handler UserDetails
+	get /user/details(UserDetailsRequest) returns (UserDetailsResponse)
+	
+	// 邮箱验证码发送
+	@handler MailCodeSendRegister
+	post /mail/code/send/register(EmailCodeRequest) returns (EmailCodeResponse)
+	
+	// 用户注册
+	@handler UserRegister
+	post /user/register(UserRegisterRequest) returns (UserRegisterResponse)
+	
+	// 获取分享资源的详情
+	@handler ShareDetails
+	get /share/details(ShareBasicDetailsRequest) returns (ShareBasicDetailsResponse)
+}
+
+@server (
+	middleware: Auth
+)
+service core-api {
+	// 文件上传
+	@handler FileUpload
+	post /file/upload(FileUploadRequest) returns (FileUploadResponse)
+	
+	// 用户文件的关联存储
+	@handler UserRepositorySave
+	post /user/repository/save(UserRepoSaveRequest) returns (UserRepoSaveResponse)
+	
+	// 用户文件列表
+	@handler UserFileList
+	get /user/file/list(UserFileListRequest) returns(UserFileListResponse)
+	
+	// 用户文件名称修改
+	@handler UserFileNameUpdate
+	post /user/file/update(UserFileNameUpdateRequest) returns (UserFileNameUpdateResponse)
+	
+	// 用户文件夹创建
+	@handler UserFolderCreate
+	post /user/folder/create(UserFolderCreateRequest) returns (UserFolderCreateResponse)
+	
+	// 用户文件删除
+	@handler UserFileDelete
+	post /user/file/delete(UserFileDeleteRequest) returns (UserFileDeleteResponse)
+	
+	// 用户文件移动
+	@handler UserFileMove
+	put /user/file/move(UserFileMoveRequest) returns(UserFileMoveResponse)
+	
+	// 创建分享记录
+	@handler ShareBasicCreate
+	post /user/share/create (ShareBasicCreateRequest) returns (ShareBasicCreateResponse)
+	
+	// 保存分享的文件
+	@handler SaveSharedFile
+	post /file/shared/save (SaveSharedFileRequest) returns (SaveSharedFileResponse)
+	
+	// 刷新鉴权
+	@handler RefrshAuth
+	post /refresh/auth (RefreshAuthRequest) returns (RefreshAuthResponse)
+	
+	// 文件上传前基本信息处理
+	@handler FileUploadPrepare
+	post /file/upload/prepare (FileUploadPrepareRequest) returns (FileUploadPrepareResponse)
+	
+	// 文件分片上传
+	@handler FileUploadChunk
+	post /file/chunk/upload (FileChunkUploadRequest) returns (FileChunkUploadResponse)
+	
+	// 文件分片上传完成的操作
+	@handler FileUploadChunkFinish
+	post /file/chunk/upload/finish (FileChunkUploadFinishRequest) returns (FileChunkUploadFinishResponse)
+}
+
+type FileChunkUploadFinishRequest {
+	Md5        string        `json:"md5"`
+	Name       string        `json:"name"`
+	Ext        string        `json:"ext"`
+	Size       int64         `json:"size"`
+	Key        string        `json:"key"`
+	UploadId   string        `json:"uploadId"`
+	CosObjects []*CosObjecet `json:"cosObjects"`
+}
+
+type CosObjecet {
+	PartNumber int    `json:"partNumber"`
+	Etag       string `json:"etag"`
+}
+
+type FileChunkUploadFinishResponse {
+	Msg string `json:"msg"`
+}
+
+type FileChunkUploadRequest {
+	// key
+	// uploadId
+	// part_num
+}
+
+type FileChunkUploadResponse {
+	Etag string `json:"etag"`
+}
+
+type FileUploadPrepareRequest {
+	Md5  string `json:"md5"`
+	Name string `json:"name"`
+	Ext  string `json:"ext"`
+}
+
+type FileUploadPrepareResponse {
+	Identity string `json:"identity"`
+	UploadId string `json:"uploadId"`
+	Key      string `json:"key"`
+	Msg      string `json:"msg"`
+}
+
+type RefreshAuthRequest {
+}
+
+type RefreshAuthResponse {
+	Token        string `json:"token"`
+	RefreshToken string `json:"refreshToken"`
+	Msg          string `json:"msg"`
+}
+
+type SaveSharedFileRequest {
+	RepositoryIdentity string `json:"repositoryIdentity"`
+	ParentId           int64  `json:"parentId"`
+}
+
+type SaveSharedFileResponse {
+	Identity string `json:"identity"`
+	Msg      string `json:"msg"`
+}
+
+type ShareBasicDetailsRequest {
+	Identity string `json:"identity"`
+}
+
+type ShareBasicDetailsResponse {
+	RepositoryIdentity string `json:"repositoryIdentity"`
+	Name               string `json:"name"`
+	Ext                string `json:"ext"`
+	Size               int64  `json:"size"`
+	Path               string `json:"path"`
+	Msg                string `json:"msg,optional"`
+}
+
+type ShareBasicCreateRequest {
+	UserRepositoryIdentity string `json:"userRepositoryIdentity"`
+	ExpireTime             int    `json:"expireTime"`
+}
+
+type ShareBasicCreateResponse {
+	Identity string `json:"identity"`
+	Msg      string `json:"msg"`
+}
+
+type UserFileMoveRequest {
+	Identity       string `json:"identity"`
+	ParentIdentity string `json:"parentIdentity"`
+}
+
+type UserFileMoveResponse {
+	Msg string `json:"msg"`
+}
+
+type UserFileDeleteRequest {
+	Identity string `json:"identity"`
+}
+
+type UserFileDeleteResponse {
+	Msg string `json:"msg"`
+}
+
+type UserFolderCreateRequest {
+	ParentId int    `json:"parentId"`
+	Name     string `json:"name"`
+}
+
+type UserFolderCreateResponse {
+	Identity string `json:"identity"`
+	Msg      string `json:"msg"`
+}
+
+type UserFileNameUpdateRequest {
+	Identity string `json:"identity"`
+	Name     string `json:"name"`
+}
+type UserFileNameUpdateResponse {
+	Msg string `json:"msg"`
+}
+
+type UserFileListRequest {
+	Id   int64 `json:"id, optional"`
+	Page int   `json:"page, optional"`
+	Size int   `json:"size, optional"`
+}
+
+type UserFileListResponse {
+	List  []*UserFile `json:"list"`
+	Count int64       `json:"count"`
+	Msg   string      `json:"msg"`
+}
+
+type UserFile {
+	Id           int64  `json:"id"`
+	Identity     string `json:"identity"`
+	RepoIdentity string `json:"repoIdentity"`
+	Name         string `json:"name"`
+	Ext          string `json:"ext"`
+	Path         string `json:"path"`
+	Size         int64  `json:"size"`
+}
+
+type UserRepoSaveRequest {
+	ParentId       int    `json:"parentId"`
+	RepoInentityId string `json:"repoInentityId"`
+	Ext            string `json:"ext"`
+	Name           string `json:"name"`
+}
+
+type UserRepoSaveResponse {
+	Msg      string `json:"msg"`
+	Inentity string `json:"inentity"`
+}
+
+type LoginRequest {
+	Name     string `json:"name"`
+	Password string `json:"password"`
+}
+
+type LoginResponse {
+	Token        string `json:"token"`
+	RefreshToken string `json:"refreshToken"`
+}
+
+type UserDetailsRequest {
+	Indentity string `json:"indentity"`
+}
+
+type UserDetailsResponse {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+type EmailCodeRequest {
+	Email string `json:"email"`
+}
+
+type EmailCodeResponse {
+	Code string `json:"code"`
+	Msg  string `json:"msg"`
+}
+
+type UserRegisterRequest {
+	Name     string `json:"name"`
+	Password string `json:"password"`
+	Email    string `json:"email"`
+	Code     string `json:"code"`
+}
+
+type UserRegisterResponse {
+	Msg string `json:"msg"`
+}
+
+type FileUploadRequest {
+	Hash string `json:"hash, optional"`
+	Name string `json:"name, optional"`
+	Ext  string `json:"ext, optional"`
+	Size int64  `json:"size, optional"`
+	Path string `json:"path, optional"`
+}
+
+type FileUploadResponse {
+	Identity string `json:"identity"`
+	Msg      string `json:"msg"`
+	Ext      string `json:"ext"`
+	Name     string `json:"name"`
+}

@@ -1,0 +1,619 @@
+{
+	"info": {
+		"_postman_id": "4e13f485-38e3-4cfe-b3c2-8fb76bc83a8f",
+		"name": "网盘云",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22021660"
+	},
+	"item": [
+		{
+			"name": "用户登录",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"li\",\r\n    \"password\":\"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/user/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户信息",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"indentity\":\"sda\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/user/details",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "发送邮箱验证码",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"123@qq.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/mail/code/send/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"mail",
+						"code",
+						"send",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户注册",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"123\",\r\n    \"password\":\"123\",\r\n    \"email\":\"123@qq.com\",\r\n    \"code\":\"086576\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/user/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文件上传",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MSwiSWRlbnRpdHkiOiJ1c2VyMSIsIk5hbWUiOiJsaSJ9.Zzn2pVfvJEzqH-_Bu-3yujuONcUGM76fbQs3RAjCg3U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Lenovo/Desktop/GCYA6440.JPEG"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/file/upload",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"file",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文件和用户关联",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MSwiSWRlbnRpdHkiOiJ1c2VyMSIsIk5hbWUiOiJsaSJ9.Zzn2pVfvJEzqH-_Bu-3yujuONcUGM76fbQs3RAjCg3U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"parentId\":0,\r\n    \"repoInentityId\":\"0d319459-8ed6-2\",\r\n    \"ext\":\"排序.png\",\r\n    \"name\":\"排序.png\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/user/repository/save",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"repository",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取用户文件列表",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MSwiSWRlbnRpdHkiOiJ1c2VyMSIsIk5hbWUiOiJsaSJ9.Zzn2pVfvJEzqH-_Bu-3yujuONcUGM76fbQs3RAjCg3U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/user/file/list",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"file",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更改用户文件名称",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MSwiSWRlbnRpdHkiOiJ1c2VyMSIsIk5hbWUiOiJsaSJ9.Zzn2pVfvJEzqH-_Bu-3yujuONcUGM76fbQs3RAjCg3U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identity\": \"77dfe08d-304a-3\",\r\n    \"name\":\"GCYA6440.JPEG\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/user/file/update",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"file",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户文件夹创建",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MSwiSWRlbnRpdHkiOiJ1c2VyMSIsIk5hbWUiOiJsaSJ9.Zzn2pVfvJEzqH-_Bu-3yujuONcUGM76fbQs3RAjCg3U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"parentId\":1,\r\n    \"name\":\"mytest\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/user/folder/create",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"folder",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户文件删除",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MSwiSWRlbnRpdHkiOiJ1c2VyMSIsIk5hbWUiOiJsaSJ9.Zzn2pVfvJEzqH-_Bu-3yujuONcUGM76fbQs3RAjCg3U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identity\":\"2f1669d2-e17d-b\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/user/file/delete",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"file",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户文件移动",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MSwiSWRlbnRpdHkiOiJ1c2VyMSIsIk5hbWUiOiJsaSJ9.Zzn2pVfvJEzqH-_Bu-3yujuONcUGM76fbQs3RAjCg3U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"parentIdentity\":\"16ee9467-4de6-0\",\r\n    \"identity\":\"1b131bc7-41d5-1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/user/file/move",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"file",
+						"move"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "创建分享链接",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MSwiSWRlbnRpdHkiOiJ1c2VyMSIsIk5hbWUiOiJsaSJ9.Zzn2pVfvJEzqH-_Bu-3yujuONcUGM76fbQs3RAjCg3U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userRepositoryIdentity\":\"4a702d5b-b7ac-d\",\r\n    \"expireTime\":3600\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/user/share/create",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"share",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取分享资源信息",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identity\":\"5273eb5c-0c97-a\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/share/details",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"share",
+						"details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "保存分享的文件",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MSwiSWRlbnRpdHkiOiJ1c2VyMSIsIk5hbWUiOiJsaSJ9.Zzn2pVfvJEzqH-_Bu-3yujuONcUGM76fbQs3RAjCg3U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"repositoryIdentity\":\"79284331-c6ff-5\",\r\n    \"parentId\":0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/file/shared/save",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"file",
+						"shared",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更新Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTk5MTg4NDcsIklkIjoxLCJJZGVudGl0eSI6InVzZXIxIiwiTmFtZSI6ImxpIn0.5q8gmFUbLDSCJmlBT0XoPCxaQf2qyzyT8U_2HKlPDOI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8888/refresh/auth",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"refresh",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文件上传的准备(文件存在)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTk5MTg4NDcsIklkIjoxLCJJZGVudGl0eSI6InVzZXIxIiwiTmFtZSI6ImxpIn0.5q8gmFUbLDSCJmlBT0XoPCxaQf2qyzyT8U_2HKlPDOI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"md5\":\"28cbf5840609b6ab3bfd4b13e99307ba\",\r\n    \"name\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888 ",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888 "
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文件上传的准备(文件不存在)",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "文件分片上传",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "文件分片上传完成",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

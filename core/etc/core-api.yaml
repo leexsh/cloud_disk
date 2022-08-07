@@ -1,0 +1,9 @@
+Name: core-api
+Host: 0.0.0.0
+Port: 8888
+
+Mysql:
+  DataSource: root:Lizheng123@tcp(127.0.0.1:3306)/cloud_disk?charset=utf8mb4&parseTime=True&loc=Local
+
+Redis:
+  Addr: 121.5.114.14:6379
