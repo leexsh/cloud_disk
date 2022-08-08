@@ -1,6 +1,12 @@
 ## 基于go-zero 和 xorm的云盘项目
 >windows gozero:https://blog.csdn.net/mokyzone/article/details/124325021
 
+![Alt text](test/test_file/picture.jpg "大致结构")
+
+--结构图基于飞书文档
+
+---
+
 - 使用到的命令
 ```go
 goctl api new core
@@ -11,6 +17,7 @@ goctl api go -api core.api -dir . -style go_zero
 // go zero run
 go run core.go  -f etc/core-api.yaml
 ```
+
 
 ### 模块
 #### 用户
